@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Per-Request Project Root for MCP Tools**: Project-scoped MCP tools (`grepai_search`, `grepai_trace_callers`, `grepai_trace_callees`, `grepai_trace_graph`, `grepai_refs_readers`, `grepai_refs_writers`, `grepai_refs_graph`, `grepai_index_status`) accept an optional `root` parameter with an absolute project path; configuration, vector store and symbol index are loaded from that path instead of the server startup project, enabling per-launch project detection across multiple projects without restarting `mcp-serve`
+  - Specifying both `workspace` and `root` in one request is rejected; an explicit `root` also takes precedence over a server started with `--workspace`
+  - The server now advertises tool capabilities during MCP initialization (`server.WithToolCapabilities(true)`), which some MCP clients require before discovering server features/roots
+
 ## [0.36.1] - 2026-09-01
 
 ### Fixed
